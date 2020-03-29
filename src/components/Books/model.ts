@@ -13,7 +13,7 @@ export interface IBooksModel extends Document {
 
 export interface IStatModel extends AggregationCursor {
     _id: number;
-    number: number;
+    value: number;
 }
 const BooksSchema: Schema = new Schema(
     {

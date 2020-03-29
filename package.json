@@ -5,7 +5,10 @@
     "scripts": {
         "build": "tsc --skipLibCheck",
         "start": "tsc --skipLibCheck && node ./build/config/server/index.js",
-        "ts:watch": "tsc -w"
+        "ts:watch": "tsc -w",
+        "xlsx-parse": "node node_modules/xlsx-json-parser",
+        "premigrate": "node node_modules/xlsx-json-parser",
+        "migrate": "migrate-mongo -f ./migrations/migrate-mongo-config.js"
     },
     "dependencies": {
         "@hapi/joi": "17.1.0",
@@ -27,6 +30,7 @@
         "express": "4.16.2",
         "helmet": "3.9.0",
         "migrate-mongo": "^7.1.0",
+        "moment": "^2.24.0",
         "mongodb": "3.5.5",
         "mongoose": "5.7.5",
         "source-map-loader": "0.2.4",
@@ -35,7 +39,11 @@
         "tslint-config-airbnb": "5.11.2",
         "tslint-config-prettier": "1.18.0",
         "tslint-eslint-rules": "5.4.0",
-        "typescript": "3.8.3"
+        "typescript": "3.8.3",
+        "xlsx-json-parser": "^0.3.5",
+        "xlsx-parse-json": "^3.1.0",
+        "xlsx-to-json": "^0.3.0",
+        "xlsx-to-json-lc": "^0.5.0"
     },
     "devDependencies": {
         "@types/migrate-mongo": "^7.0.0",

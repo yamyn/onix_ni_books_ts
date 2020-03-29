@@ -15,7 +15,20 @@ const BooksService: IBooksService = {
      * @memberof BooksService
      */
     getChartData(): Aggregate<IStatModel[]> {
-        return BooksModel.aggregate([]);
+        return BooksModel.aggregate([
+            {
+                $project: {
+                    code3: 1,
+                    count: { $add: [1] },
+                },
+            },
+            {
+                $group: {
+                    _id: '$code3',
+                    value: { $sum: '$count' },
+                },
+            },
+        ]);
     },
 };
 

@@ -16,7 +16,7 @@ export async function chart(
 ): Promise<void> {
     try {
         const data: IStatModel[] = await BooksService.getChartData();
-
+        console.log(data);
         res.status(200).json({ data });
     } catch (error) {
         res.status(500).json({
