@@ -5,7 +5,7 @@
         margin: 0 auto;
     }
 
-    .highcharts-tooltip>span {
+    .highcharts-tooltip > span {
         padding: 10px;
         white-space: normal !important;
         width: 200px;
@@ -20,7 +20,6 @@
     .f32 .flag {
         vertical-align: middle !important;
     }
-
 </style>
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/data.js"></script>
@@ -32,79 +31,80 @@
 
 <script>
     window.onload = () => {
-        Highcharts.getJSON(
-            'http://localhost:3000/v1/books',
-            ({ data }) => {
-                // Prevent logarithmic errors in color calculation
-                data.forEach(p => {
-                    p.value = (p.value < 1 ? 1 : p.value);
-                });
+        Highcharts.getJSON('http://localhost:3000/v1/books', ({ data }) => {
+            // Prevent logarithmic errors in color calculation
+            data.forEach(p => {
+                p.value = p.value < 1 ? 1 : p.value;
+            });
 
-                // Initiate the chart
-                Highcharts.mapChart('container', {
+            // Initiate the chart
+            Highcharts.mapChart('container', {
+                chart: {
+                    map: 'custom/world',
+                },
 
-                    chart: {
-                        map: 'custom/world'
-                    },
+                title: {
+                    text: 'Books',
+                },
 
+                legend: {
                     title: {
-                        text: 'Books'
-                    },
-
-                    legend: {
-                        title: {
-                            text: 'Count Books',
-                            style: {
-                                color: ( // theme
-                                    Highcharts.defaultOptions &&
+                        text: 'Count Books',
+                        style: {
+                            color:
+                                // theme
+                                (Highcharts.defaultOptions &&
                                     Highcharts.defaultOptions.legend &&
                                     Highcharts.defaultOptions.legend.title &&
-                                    Highcharts.defaultOptions.legend.title.style &&
-                                    Highcharts.defaultOptions.legend.title.style.color
-                                ) || 'black'
-                            }
-                        }
+                                    Highcharts.defaultOptions.legend.title
+                                        .style &&
+                                    Highcharts.defaultOptions.legend.title.style
+                                        .color) ||
+                                'black',
+                        },
                     },
+                },
 
-                    mapNavigation: {
-                        enabled: true,
-                        buttonOptions: {
-                            verticalAlign: 'bottom'
-                        }
+                mapNavigation: {
+                    enabled: true,
+                    buttonOptions: {
+                        verticalAlign: 'bottom',
                     },
+                },
 
-                    tooltip: {
-                        backgroundColor: 'none',
-                        borderWidth: 0,
-                        shadow: false,
-                        useHTML: true,
-                        padding: 0,
-                        positioner() {
-                            return {
-                                x: 0,
-                                y: 250
-                            };
-                        }
+                tooltip: {
+                    backgroundColor: 'none',
+                    borderWidth: 0,
+                    shadow: false,
+                    useHTML: true,
+                    padding: 0,
+                    positioner() {
+                        return {
+                            x: 0,
+                            y: 250,
+                        };
                     },
+                },
 
-                    colorAxis: {
-                        min: 1,
-                        max: 1000,
-                        type: 'logarithmic'
-                    },
+                colorAxis: {
+                    min: 1,
+                    max: 1000,
+                    type: 'logarithmic',
+                },
 
-                    series: [{
+                series: [
+                    {
                         data,
-                        joinBy: ['iso-a3', 'code3'],
+                        joinBy: ['iso-a3', '_id'],
                         name: 'Books count',
                         states: {
                             hover: {
-                                color: '#a4edba'
-                            }
-                        }
-                    }]
-                });
+                                color: '#a4edba',
+                            },
+                        },
+                    },
+                ],
             });
-    }
-
+        });
+    };
 </script>

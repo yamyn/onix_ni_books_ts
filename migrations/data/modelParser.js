@@ -1,16 +1,26 @@
-const code3 = require('./json/code3.json').code3.translations;
-const description = require('./json/description.json').description.translations;
-const title = require('./json/title.json').title.translations;
-module.exports = () => {
-    const keys = Object.keys(code3);
-    const books = [];
-    for (const key of keys) {
-        const book = {};
-        book.title = title[key];
-        book.titleLength = title[key].length;
-        book.description = description[key];
-        book.code3 = code3[key];
-        books.push(book);
-    }
-    return books;
-};
+const path = require('path');
+const csvFilePath = path.join(__dirname, 'books.csv');
+const csv = require('csvtojson');
+
+module.exports = () => csv().fromFile(csvFilePath);
+// const fun = () => csv().fromFile(csvFilePath);
+// const a = async () => {
+//     const l = await fun();
+//     console.log(l);
+// };
+
+// a();
+// fun().then(books => console.log(books));
+// console.log(fun());
+
+// csv()
+//     .fromFile(csvFilePath)
+//     .then(jsonObj => {
+//         console.log(jsonObj);
+//         /**
+//          * [
+//          * 	{a:"1", b:"2", c:"3"},
+//          * 	{a:"4", b:"5". c:"6"}
+//          * ]
+//          */
+//     });

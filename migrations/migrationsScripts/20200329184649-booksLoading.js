@@ -1,8 +1,9 @@
-const books = require('../data/modelParser')();
+const genBooks = require('../data/modelParser');
 
 module.exports = {
     async up(db) {
         try {
+            const books = await genBooks();
             for (let i = 0; i < books.length; i += 1) {
                 await db.collection('booksmodel').insertOne({
                     ...books[i],

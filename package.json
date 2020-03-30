@@ -6,8 +6,6 @@
         "build": "tsc --skipLibCheck",
         "start": "tsc --skipLibCheck && node ./build/config/server/index.js",
         "ts:watch": "tsc -w",
-        "xlsx-parse": "node node_modules/xlsx-json-parser",
-        "premigrate": "node node_modules/xlsx-json-parser",
         "migrate": "migrate-mongo -f ./migrations/migrate-mongo-config.js"
     },
     "dependencies": {
@@ -26,6 +24,7 @@
         "compression": "1.7.1",
         "cookie-parser": "1.4.3",
         "cors": "2.8.5",
+        "csvtojson": "^2.0.10",
         "dotenv": "8.2.0",
         "express": "4.16.2",
         "helmet": "3.9.0",
