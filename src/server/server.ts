@@ -1,16 +1,10 @@
 import * as http from 'http';
+
 import App from './expressApp';
 import * as Middleware from '../config/middleware';
 import * as Routes from '../config/router';
 import * as events from './events';
-
-interface IEvents {
-    onError: (
-        error: NodeJS.ErrnoException,
-        port: number | string | boolean,
-    ) => void;
-    onListening: () => void;
-}
+import { IEvents } from './interfaces';
 
 class Server extends App {
     private _server: http.Server;
@@ -34,6 +28,9 @@ class Server extends App {
     }
 }
 
+/**
+ * @exports {class Server Instance}
+ */
 export default new Server(events)
     .toConfigure(Middleware.configure)
     .initRouter(Routes.init);

@@ -1,14 +1,8 @@
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+import { IConfig } from '../interfaces';
 
-interface IConfig {
-    port: string | number;
-    database: {
-        MONGODB_URI: string;
-        MONGODB_DB_MAIN: string;
-    };
-}
+dotenv.config();
 
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
 

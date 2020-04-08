@@ -1,20 +1,16 @@
 import BooksModel from './model';
-import { IBooksService, IStatModel } from './Interfaces';
+import { IStatModel } from './Interfaces';
 import { Aggregate } from 'mongoose';
+import { Service } from './serviceComponent';
 
-/**
- * @export
- * @implements {IBooksService}
- */
-
-const BooksService: IBooksService = {
+class BooksService implements Service {
     /**
      * @method getChartData
      * @summary give group array books for countries
      * @returns {Aggregate<AggregationCursor[]>}
      * @memberof BooksService
      */
-    getChartData(): Aggregate<IStatModel[]> {
+    public getChartData(): Aggregate<IStatModel[]> {
         return BooksModel.aggregate([
             {
                 $project: {
@@ -29,7 +25,7 @@ const BooksService: IBooksService = {
                 },
             },
         ]);
-    },
-};
+    }
+}
 
-export default BooksService;
+export default new BooksService();

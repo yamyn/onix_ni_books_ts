@@ -1,5 +1,5 @@
-import { Schema } from 'mongoose';
-import * as connections from '../../config/connection';
+import { Schema, Document } from 'mongoose';
+import * as connections from '../../config/connection/connection';
 import { prop, modelOptions, buildSchema } from '@typegoose/typegoose';
 
 @modelOptions({
@@ -27,4 +27,4 @@ export class Book {
 
 const BooksSchema: Schema = buildSchema(Book);
 
-export default connections.db.model('BooksModel', BooksSchema);
+export default connections.db.model<Document>('BooksModel', BooksSchema);

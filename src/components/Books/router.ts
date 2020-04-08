@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import * as BooksComponent from '../Books';
+import BooksComponent from '../Books';
 
 /**
  * Express router to mount user related functions on.
