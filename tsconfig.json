@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-        // "emitDecoratorMetadata": true,
-        // "experimentalDecorators": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
         "outDir": "./build/",
         "module": "commonjs",
         "noImplicitAny": true,

@@ -1,5 +1,5 @@
-import BooksModel, { IStatModel } from './model';
-import { IBooksService } from './Interface';
+import BooksModel from './model';
+import { IBooksService, IStatModel } from './Interfaces';
 import { Aggregate } from 'mongoose';
 
 /**

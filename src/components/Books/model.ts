@@ -1,51 +1,30 @@
-import { Document, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import * as connections from '../../config/connection';
-import { AggregationCursor } from 'mongodb';
+import { prop, modelOptions, buildSchema } from '@typegoose/typegoose';
 
-export interface IBooksModel extends Document {
-    title: string;
+@modelOptions({
+    schemaOptions: { collection: 'booksmodel', versionKey: false },
+})
+export class Book {
+    @prop({ trim: true })
+    title?: string;
+
+    @prop({ required: false })
     titleLength?: number;
-    description: string;
-    code3: string;
-    createdAt: Date;
-    updatedAt: Date;
+
+    @prop({ required: true })
+    description!: string;
+
+    @prop({ required: true })
+    code3!: string;
+
+    @prop({ required: true })
+    createAt!: Date;
+
+    @prop({ required: true })
+    updatedAt!: Date;
 }
 
-export interface IStatModel extends AggregationCursor {
-    _id: number;
-    value: number;
-}
-const BooksSchema: Schema = new Schema(
-    {
-        title: {
-            type: String,
-            trim: true,
-        },
-        titleLength: {
-            type: Number,
-            required: false,
-        },
-        description: {
-            type: String,
-            required: true,
-        },
-        code3: {
-            type: String,
-            required: true,
-        },
-        createdAt: {
-            type: Date,
-            required: true,
-        },
-        updatedAt: {
-            type: Date,
-            required: true,
-        },
-    },
-    {
-        collection: 'booksmodel',
-        versionKey: false,
-    },
-);
+const BooksSchema: Schema = buildSchema(Book);
 
-export default connections.db.model<IBooksModel>('BooksModel', BooksSchema);
+export default connections.db.model('BooksModel', BooksSchema);

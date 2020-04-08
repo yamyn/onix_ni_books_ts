@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { IStatModel } from './model';
+import { IStatModel } from './Interfaces';
 import BooksService from './service';
 
 /**

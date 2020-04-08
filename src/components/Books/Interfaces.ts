@@ -1,5 +1,5 @@
-import { IStatModel } from './model';
 import { Aggregate } from 'mongoose';
+import { AggregationCursor } from 'mongodb';
 
 /**
  * @export
@@ -11,4 +11,13 @@ export interface IBooksService {
      * @memberof IIBooksService
      */
     getChartData(): Aggregate<IStatModel[]>;
+}
+
+/**
+ * @export
+ * @interface IStatModel
+ */
+export interface IStatModel extends AggregationCursor {
+    _id: number;
+    value: number;
 }
